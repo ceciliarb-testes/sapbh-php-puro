@@ -13,21 +13,35 @@ require_once("StorageService.php");
     <title>Projeto Exemplo PHP Puro acessando SAPBH</title>
 </head>
 <body>
+<?php
+    if(isset($_GET['arquivo'])) {
+        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br', 'teste:123456789');
+        $resposta = $ss->download($_GET['arquivo'], false);
+        if($resposta['resposta']) {
+            $finfo = new finfo(FILEINFO_MIME);
+            $mimetype = $finfo->buffer($resposta['resposta']);
+            header('Content-Description: File Transfer');
+            header('Content-Transfer-Encoding: binary');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header("Content-type: ".$mimetype); 
+            header("Content-Disposition: inline; filename=arquivo");
+            ob_clean();
+            flush();
+            echo($resposta['resposta']);
+            exit();
+        } else {
+            var_dump($resposta);
+        }
+        
+    }
+
+    ?>
     <div>
        <a href="/upload.php">Upload de arquivo</a> | 
        Download de arquivo | 
        <a href="/url.php">Recupera url de arquivo</a> | 
        <a href="/delete.php">Remove arquivo</a> | 
     </div>
-    <?php
-    if(isset($_GET['arquivo'])) {
-        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br/api/documentos', 'teste:123456789');
-        $resposta = $ss->download($_GET['arquivo']);
-        var_dump($resposta);
-        echo "<pre>".json_encode($resposta)."</pre>";
-    }
-
-    ?>
     <p></p>
 </body>
 </html>

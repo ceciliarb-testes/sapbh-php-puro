@@ -21,7 +21,7 @@ require_once("StorageService.php");
     </div>
     <?php
     if(isset($_GET['arquivo'])) {
-        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br/api/documentos', 'teste:123456789');
+        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br', 'teste:123456789');
         $resposta = $ss->getURL($_GET['arquivo']);
         var_dump($resposta);
         echo "<pre>".json_encode($resposta)."</pre>";

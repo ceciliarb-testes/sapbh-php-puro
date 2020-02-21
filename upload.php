@@ -21,7 +21,8 @@ require_once("StorageService.php");
     </div>
     <?php
     if($_FILES) {
-        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br/api/documentos', 'teste:123456789');
+        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br', 'teste:123456789');
+        // $ss = new Prodabel\StorageAdapter\StorageService('http://localhost:8000', 'teste:123456789');
         $resposta = $ss->upload($_FILES);
         var_dump($resposta);
         echo "<pre>".json_encode($resposta)."</pre>";
@@ -31,10 +32,22 @@ require_once("StorageService.php");
     <p></p>
     <div>
         <form enctype="multipart/form-data" action="" method="POST">
+            <input type="hidden" name="_token" id="_token">
+
             Enviar esse arquivo: 
             <input name="arquivo" type="file" />
             <input type="submit" value="Enviar arquivo" />
         </form>
     </div>
+    <script defer>
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        var v = getCookie("PHPSESSID");
+        document.getElementById("_token").value = v;
+        console.log(v);
+    </script>
 </body>
 </html>
