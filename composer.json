@@ -1,0 +1,15 @@
+{
+    "name": "prodabel/teste-php",
+    "description": "Teste de consumo do SAPBH, utilizando php puro",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prodabel",
+            "email": "prodabel@pbh.gov.br"
+        }
+    ]
+}
