@@ -21,7 +21,7 @@ require_once("StorageService.php");
     </div>
     <?php
     if($_FILES) {
-        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br', 'teste:123456789');
+        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh-hm.pbh.gov.br', 'teste:123456789');
         // $ss = new Prodabel\StorageAdapter\StorageService('http://localhost:8000', 'teste:123456789');
         $resposta = $ss->upload($_FILES);
         var_dump($resposta);
