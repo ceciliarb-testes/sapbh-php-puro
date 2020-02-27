@@ -15,7 +15,7 @@ require_once("StorageService.php");
 <body>
 <?php
     if(isset($_GET['arquivo'])) {
-        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh.pbh.gov.br', 'teste:123456789');
+        $ss = new Prodabel\StorageAdapter\StorageService('https://sapbh-hm.pbh.gov.br', 'teste:123456789');
         $resposta = $ss->download($_GET['arquivo'], false);
         if($resposta['resposta']) {
             $finfo = new finfo(FILEINFO_MIME);
